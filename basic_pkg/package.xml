@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>study_ros2</name>
+  <name>basic_pkg</name>
   <version>0.0.0</version>
-  <description>ROS2 study package</description>
+  <description>ROS2 study - basic package</description>
   <maintainer email="kyp970115@gmail.com">kyp</maintainer>
   <license>TODO: License declaration</license>
 
