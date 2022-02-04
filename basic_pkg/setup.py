@@ -14,7 +14,7 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='kyp',
-    maintainer_email='kyp970115@gmail.com',
+    maintainer_email='tutor0613@github.com',
     description='ROS2 study - basic package',
     license='TODO: License declaration',
     tests_require=['pytest'],

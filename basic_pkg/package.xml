@@ -4,7 +4,7 @@
   <name>basic_pkg</name>
   <version>0.0.0</version>
   <description>ROS2 study - basic package</description>
-  <maintainer email="kyp970115@gmail.com">kyp</maintainer>
+  <maintainer email="tutor0613@github.com">kyp</maintainer>
   <license>TODO: License declaration</license>
 
   <test_depend>ament_copyright</test_depend>
@@ -14,6 +14,7 @@
 
   <depend>rclpy</depend>
   <depend>std_msgs</depend>
+  <depend>basic_msgs</depend>
 
   <export>
     <build_type>ament_python</build_type>

@@ -3,7 +3,7 @@ from rclpy.node import Node
 from rclpy.parameter import Parameter
 from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSHistoryPolicy, QoSReliabilityPolicy
 from rcl_interfaces.msg import SetParametersResult
-from std_msgs.msg import Int32MultiArray
+from basic_msgs.msg import TwoInt32
 
 
 class ArgumentPublisher(Node):
@@ -23,16 +23,16 @@ class ArgumentPublisher(Node):
             durability = QoSDurabilityPolicy.VOLATILE
         )
 
-        self.argument_publisher = self.create_publisher(Int32MultiArray, 'argument', qos_profile)
+        self.argument_publisher = self.create_publisher(TwoInt32, 'argument', qos_profile)
         self.timer = self.create_timer(1, self.publish_arguments)
 
     def publish_arguments(self):
-        arg1 = random.randint(self.min_random_num, self.max_random_num)
-        arg2 = random.randint(self.min_random_num, self.max_random_num)
-        msg = Int32MultiArray(); msg.data = [arg1, arg2]
+        arg_a = random.randint(self.min_random_num, self.max_random_num)
+        arg_b = random.randint(self.min_random_num, self.max_random_num)
+        msg = TwoInt32(); msg.a = arg_a; msg.b = arg_b
 
         self.argument_publisher.publish(msg)
-        self.get_logger().warn("[ArgumentPub] Publish Args : %d, %d"%(msg.data[0], msg.data[1]))
+        self.get_logger().warn("[ArgumentPub] Publish Args : %d, %d"%(msg.a, msg.b))
 
     def update_parameter(self, params):  # Param Set Callback!!
         for param in params:

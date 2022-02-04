@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, QoSDurabilityPolicy, QoSHistoryPolicy, QoSReliabilityPolicy
 from rclpy.callback_groups import ReentrantCallbackGroup
-from std_msgs.msg import Int32MultiArray
+from basic_msgs.msg import TwoInt32
 
 
 class Calculator(Node):
@@ -19,22 +19,22 @@ class Calculator(Node):
         )
 
         self.argument_subscriber = self.create_subscription(
-            Int32MultiArray, 'argument', self.argument_callback, qos_profile, 
+            TwoInt32, 'argument', self.argument_callback, qos_profile, 
             callback_group=self.callback_group
         )
 
-        self.operate_srv_server = self.create_service(
+        # self.operate_srv_server = self.create_service(
             
-        )
+        # )
 
     def argument_callback(self, msg):
-        if not len(msg.data) == 2:
-            self.get_logger().warn("[Calculator] Invalid input. ")
+        try:
+            self.arg_a = msg.a
+            self.arg_b = msg.b
+            self.get_logger().warn("[Calculator] Subscribed Args : %d, %d"%(msg.a, msg.b))
+        except Exception as e:
+            self.get_logger().warn("[Calculator] Exception : %s"%e)
             return
-
-        self.arg_a = msg.data[0]
-        self.arg_b = msg.data[1]
-        self.get_logger().warn("[Calculator] Subscribed Args : %d, %d"%(msg.data[0], msg.data[1]))
 
 
 
