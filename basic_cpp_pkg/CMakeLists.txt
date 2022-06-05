@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(basic_msgs)
+project(basic_cpp_pkg)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -17,12 +17,22 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(rosidl_default_generators REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(basic_msgs REQUIRED)
 
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+# Build
+add_executable(basic_cpp_pub src/basic_pub.cpp)
+ament_target_dependencies(basic_cpp_pub rclcpp basic_msgs)
+#rosidl_target_interfaces(basic_cpp_pub ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
+# Install
+install(TARGETS
+  basic_cpp_pub
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+# Test
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
@@ -33,11 +43,5 @@ if(BUILD_TESTING)
   #set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-
-rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/TwoInt32.msg"
-  "msg/Int32.msg"
-  "srv/OperateArgs.srv"
-)
 
 ament_package()
