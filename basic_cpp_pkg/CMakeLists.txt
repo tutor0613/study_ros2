@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.5)
 project(basic_cpp_pkg)
 
 # Default to C99
-if(NOT CMAKE_C_STANDARD)
-  set(CMAKE_C_STANDARD 99)
-endif()
+# if(NOT CMAKE_C_STANDARD)
+#   set(CMAKE_C_STANDARD 99)
+# endif()
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
@@ -22,17 +22,15 @@ find_package(std_msgs REQUIRED)
 find_package(basic_msgs REQUIRED)
 
 # Build
-add_executable(basic_cpp_pub src/basic_pub.cpp)
-ament_target_dependencies(basic_cpp_pub rclcpp basic_msgs)
-#rosidl_target_interfaces(basic_cpp_pub ${PROJECT_NAME} "rosidl_typesupport_cpp")
+add_executable(basic_pub src/basic_pub.cpp)
+ament_target_dependencies(basic_pub rclcpp std_msgs basic_msgs)
 
 # Install
 install(TARGETS
-  basic_cpp_pub
-  DESTINATION lib/${PROJECT_NAME}
-)
+  basic_pub
+  DESTINATION lib/${PROJECT_NAME})
 
-# Test
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
